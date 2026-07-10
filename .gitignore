@@ -1,0 +1,7 @@
+.qodo/
+.vscode/
+.env/
+.venv/
+.bashrc/
+bashrc/
+*bash*
