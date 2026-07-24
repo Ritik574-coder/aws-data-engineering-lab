@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amazon-s3-production-engineering"
+version = "0.1.0"
+description = "Production-grade Amazon S3 learning repository using Python and boto3."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "AWS Data Engineering Lab" }]
+dependencies = [
+    "boto3>=1.34.0",
+    "botocore>=1.34.0",
+    "click>=8.1.7",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.7.0",
+    "rich>=13.7.1",
+]
+
+[project.optional-dependencies]
+data = ["pandas>=2.2.0", "pyarrow>=15.0.0", "duckdb>=0.10.0", "polars>=0.20.0", "pyspark>=3.5.0"]
+test = ["pytest>=8.2.0", "moto[s3,sts,iam]>=5.0.0", "mypy>=1.10.0"]
+
+[project.scripts]
+s3lab = "s3_learning.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers"
+markers = [
+    "integration: tests that require a real AWS account and are skipped by default",
+]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src", "tests"]
+ignore_missing_imports = true
+strict = true
+warn_unreachable = true
+warn_unused_ignores = true
+

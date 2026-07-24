@@ -1,0 +1,2 @@
+sample object for Amazon S3 learning examples
+
